@@ -1,0 +1,40 @@
+{
+  "name": "nitecore-theme",
+  "version": "1.0.0",
+  "description": "Professional dark PrestaShop 8/9 theme inspired by nitecore.de",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "build:css": "webpack --mode production --config webpack.config.js",
+    "lint:scss": "stylelint \"assets/css/**/*.scss\"",
+    "lint:js": "eslint \"assets/js/**/*.js\""
+  },
+  "dependencies": {
+    "swiper": "^12.1.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-loader": "^9.1.3",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "mini-css-extract-plugin": "^2.7.6",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "terser-webpack-plugin": "^5.3.9",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ]
+}

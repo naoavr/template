@@ -1,0 +1,41 @@
+name: nitecore-theme
+display_name: "Nitecore Theme"
+version: "1.0.0"
+author:
+  name: "Nitecore Theme"
+  email: ""
+  url: ""
+
+meta:
+  compatibility:
+    from: "8.0.0"
+    to: ~
+  available_layouts:
+    layout-full-width:
+      name: "Full Width"
+      description: "Full width layout without sidebar"
+    layout-both-columns:
+      name: "Two Columns"
+      description: "Layout with left and right sidebars"
+  use_parent_assets: true
+  parent: classic
+
+global_settings:
+  configuration:
+    PS_IMAGE_QUALITY: jpg
+
+# Theme supports these image types
+assets:
+  css:
+    all:
+      - id: custom
+        path: assets/css/custom.css
+        media: all
+  js:
+    all:
+      - id: theme
+        path: assets/js/theme.js
+        priority: 200
+      - id: megamenu
+        path: assets/js/megamenu.js
+        priority: 201

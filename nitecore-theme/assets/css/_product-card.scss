@@ -1,0 +1,431 @@
+// =============================================================================
+// _product-card.scss — Reusable product card component
+// =============================================================================
+
+// --- Grid / List wrapper ------------------------------------------------------
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+
+  @media (max-width: $breakpoint-xl) { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: $breakpoint-md) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: $breakpoint-sm) { grid-template-columns: 1fr; }
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  .product-card {
+    flex-direction: row;
+    height: auto;
+
+    .product-card__image-wrap { flex: 0 0 200px; }
+    .product-card__body { flex: 1; }
+  }
+}
+
+// --- Section Header -----------------------------------------------------------
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-xl;
+  gap: $spacing-md;
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    position: relative;
+    padding-left: $spacing-md;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 100%;
+      background: $color-primary;
+      border-radius: $border-radius-full;
+    }
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: $color-primary;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    transition: gap $transition-fast;
+    white-space: nowrap;
+
+    &:hover { gap: $spacing-sm; }
+  }
+}
+
+// --- Card Container -----------------------------------------------------------
+.product-card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform $transition-base, box-shadow $transition-base, border-color $transition-base;
+  will-change: transform;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+    border-color: $border-color-light;
+
+    .product-card__actions { opacity: 1; transform: translateY(0); }
+    .product-card__image { transform: scale(1.05); }
+  }
+}
+
+// --- Image Area ---------------------------------------------------------------
+.product-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: $bg-dark-accent;
+  flex-shrink: 0;
+}
+
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform $transition-slow;
+}
+
+.product-card__image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-muted;
+  font-size: 48px;
+}
+
+// --- Badges -------------------------------------------------------------------
+.product-card__badges {
+  position: absolute;
+  top: $spacing-sm;
+  left: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  z-index: 2;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+
+  &--new {
+    background: $color-primary;
+    color: $bg-black;
+  }
+
+  &--hot {
+    background: $color-accent;
+    color: $text-primary;
+  }
+
+  &--sale {
+    background: $color-accent;
+    color: $text-primary;
+  }
+
+  &--out-of-stock {
+    background: $bg-dark-accent;
+    color: $text-muted;
+    border: 1px solid $border-color;
+  }
+}
+
+// --- Wishlist button on card --------------------------------------------------
+.product-card__wishlist {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+  z-index: 2;
+  background: rgba($bg-dark, 0.8);
+  border: 1px solid $border-color;
+  color: $text-muted;
+  width: 32px;
+  height: 32px;
+  border-radius: $border-radius-full;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background $transition-fast, color $transition-fast, border-color $transition-fast;
+
+  &:hover,
+  &.is-active {
+    background: $color-accent;
+    border-color: $color-accent;
+    color: $text-primary;
+  }
+}
+
+// --- Card Body ----------------------------------------------------------------
+.product-card__body {
+  padding: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  flex: 1;
+}
+
+.product-card__name {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  line-height: $line-height-tight;
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color $transition-fast;
+
+  &:hover { color: $color-primary; }
+}
+
+.product-card__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  li {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &::before {
+      content: '▸';
+      color: $color-primary;
+      font-size: 10px;
+    }
+  }
+}
+
+.product-card__stock {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+
+  &--in-stock {
+    color: $color-success;
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: $color-success;
+      border-radius: $border-radius-full;
+      display: inline-block;
+    }
+  }
+
+  &--low-stock {
+    color: $color-warning;
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: $color-warning;
+      border-radius: $border-radius-full;
+      display: inline-block;
+    }
+  }
+
+  &--out-of-stock {
+    color: $text-muted;
+
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: $text-muted;
+      border-radius: $border-radius-full;
+      display: inline-block;
+    }
+  }
+}
+
+// --- Pricing ------------------------------------------------------------------
+.product-card__pricing {
+  display: flex;
+  align-items: baseline;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.product-card__price {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+}
+
+.product-card__price-original {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  text-decoration: line-through;
+}
+
+.product-card__discount {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  color: $color-accent;
+  background: rgba($color-accent, 0.15);
+  padding: 2px $spacing-xs;
+  border-radius: $border-radius-sm;
+}
+
+// --- Card Actions (add to cart / details) -------------------------------------
+.product-card__actions {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md $spacing-md;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity $transition-base, transform $transition-base;
+
+  // Always show on touch devices and when card is focused
+  @media (hover: none) { opacity: 1; transform: translateY(0); }
+
+  .btn-cart {
+    flex: 1;
+    background: $color-primary;
+    color: $bg-black;
+    border: none;
+    border-radius: $border-radius-md;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    cursor: pointer;
+    transition: background $transition-fast, box-shadow $transition-fast;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-xs;
+
+    &:hover {
+      background: $color-primary-hover;
+      box-shadow: $shadow-glow-primary;
+    }
+
+    &:disabled {
+      background: $bg-dark-accent;
+      color: $text-muted;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-details {
+    background: $bg-dark-accent;
+    color: $text-secondary;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-md;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    transition: color $transition-fast, border-color $transition-fast;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+}
+
+// --- Promotional Banner -------------------------------------------------------
+.promo-banner {
+  background: linear-gradient(135deg, $bg-dark 0%, $bg-dark-secondary 50%, $bg-dark-accent 100%);
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  padding: $spacing-3xl 0;
+  text-align: center;
+
+  &__eyebrow {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-primary;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: $spacing-sm;
+    display: block;
+  }
+
+  &__title {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-extrabold;
+    color: $text-primary;
+    margin-bottom: $spacing-md;
+    line-height: $line-height-tight;
+
+    span { color: $color-accent; }
+
+    @media (max-width: $breakpoint-md) { font-size: $font-size-3xl; }
+  }
+
+  &__desc {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    margin-bottom: $spacing-xl;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.products-section {
+  padding: $spacing-3xl 0;
+  background: $bg-dark;
+
+  &--alt {
+    background: $bg-black;
+  }
+
+  &--accent {
+    background: $bg-dark-secondary;
+  }
+}

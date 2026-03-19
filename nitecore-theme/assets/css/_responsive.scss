@@ -1,0 +1,196 @@
+// =============================================================================
+// _responsive.scss — Media query helpers and mobile-specific overrides
+// =============================================================================
+
+// --- Utility mixins -----------------------------------------------------------
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'sm'  { @media (max-width: #{$breakpoint-sm})  { @content; } }
+  @if $breakpoint == 'md'  { @media (max-width: #{$breakpoint-md})  { @content; } }
+  @if $breakpoint == 'lg'  { @media (max-width: #{$breakpoint-lg})  { @content; } }
+  @if $breakpoint == 'xl'  { @media (max-width: #{$breakpoint-xl})  { @content; } }
+  @if $breakpoint == 'xxl' { @media (max-width: #{$breakpoint-xxl}) { @content; } }
+}
+
+// --- Container ----------------------------------------------------------------
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+
+  @media (min-width: $breakpoint-sm)  { padding: 0 $spacing-lg; }
+  @media (min-width: $breakpoint-lg)  { padding: 0 $spacing-xl; }
+  @media (min-width: $breakpoint-xxl) { padding: 0 $spacing-2xl; }
+}
+
+// --- Layout columns (sidebar layouts) ----------------------------------------
+.layout-columns {
+  display: grid;
+  gap: $spacing-xl;
+  align-items: start;
+
+  &--left  { grid-template-columns: 240px 1fr; }
+  &--right { grid-template-columns: 1fr 240px; }
+  &--both  { grid-template-columns: 240px 1fr 240px; }
+
+  @media (max-width: #{$breakpoint-lg - 1px}) {
+    &--left,
+    &--right,
+    &--both { grid-template-columns: 1fr; }
+  }
+}
+
+// --- Large screens (≥ 1200px) — default layout already handles this ----------
+
+// --- Tablet landscape (992px – 1199px) ----------------------------------------
+@media (max-width: #{$breakpoint-xl - 1px}) {
+  .topbar__promo { display: none; }
+
+  .header-main__inner {
+    gap: $spacing-lg;
+  }
+}
+
+// --- Tablet portrait (768px – 991px) -----------------------------------------
+@media (max-width: #{$breakpoint-lg - 1px}) {
+  // Hide desktop nav, show hamburger
+  .header-nav { display: none; }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  // Compact header
+  .header-main {
+    height: 64px;
+  }
+
+  .header-logo img { height: 36px; }
+
+  // Shrink action labels
+  .header-actions__item span { display: none; }
+
+  // Full-width hero
+  .hero-content {
+    padding: $spacing-lg $spacing-xl;
+  }
+
+  // Footer grid collapse
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// --- Mobile (< 768px) ---------------------------------------------------------
+@media (max-width: #{$breakpoint-md - 1px}) {
+  // Header adjustments
+  .topbar { display: none; } // Hide topbar on very small screens
+
+  .header-main {
+    height: 56px;
+  }
+
+  .header-search {
+    display: none;
+
+    &.is-open {
+      display: flex;
+      position: fixed;
+      top: 56px;
+      left: 0;
+      right: 0;
+      z-index: $z-index-fixed;
+      background: $bg-dark-secondary;
+      border-bottom: 1px solid $border-color;
+      padding: $spacing-sm $spacing-md;
+
+      &__form {
+        width: 100%;
+      }
+    }
+  }
+
+  .header-search__toggle { display: flex; }
+
+  // Hide some action items
+  .header-actions__item--account span { display: none; }
+
+  // Hero on mobile
+  .hero-content__title { font-size: $font-size-2xl; }
+  .hero-content__subtitle { display: none; }
+  .hero-content { padding: $spacing-md $spacing-lg; }
+
+  // Single column products
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-sm;
+  }
+
+  // Footer single column
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+  }
+
+  .newsletter-section__inner {
+    align-items: stretch;
+  }
+
+  // Hide some topbar items
+  .topbar__left .topbar__item:not(:first-child) { display: none; }
+}
+
+// --- Extra small mobile (< 576px) --------------------------------------------
+@media (max-width: #{$breakpoint-sm - 1px}) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content__actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+// --- Touch device overrides ---------------------------------------------------
+@media (hover: none) {
+  .product-card__actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mega-menu,
+  .nav-dropdown {
+    // Handled via JS click on touch
+  }
+}
+
+// --- Print --------------------------------------------------------------------
+@media print {
+  .site-header,
+  .footer-main,
+  .footer-copyright,
+  .newsletter-section,
+  .hero-section,
+  .header-nav,
+  .mobile-menu-toggle,
+  .product-card__actions {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}
