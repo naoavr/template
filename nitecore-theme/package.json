@@ -15,7 +15,7 @@
     "lint:js": "eslint \"assets/js/**/*.js\""
   },
   "dependencies": {
-    "swiper": "^11.0.0"
+    "swiper": "^12.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",

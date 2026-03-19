@@ -191,7 +191,7 @@ npm run build
 
 | Feature | Implementation |
 |---|---|
-| Hero slider | Swiper.js 11 (autoplay, fade, keyboard, a11y) |
+| Hero slider | Swiper.js 12 (autoplay, fade, keyboard, a11y) |
 | Sticky header | `IntersectionObserver`-free scroll listener with `requestAnimationFrame` |
 | Hide-on-scroll header | Shows when scrolling up, hides when scrolling down |
 | Mobile menu | Slide-in drawer with overlay and focus trap |

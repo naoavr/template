@@ -9,7 +9,7 @@
  *}
 
 {* Include Swiper CSS from CDN *}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
 
 <section class="hero-section" aria-label="{l s='Featured promotions' d='Shop.Theme.Global'}">
 
@@ -158,4 +158,4 @@
 </section>
 
 {* Swiper JS (deferred) *}
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
