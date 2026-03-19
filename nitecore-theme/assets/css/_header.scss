@@ -1,0 +1,522 @@
+// =============================================================================
+// _header.scss — Topbar, main header and mega-navigation
+// =============================================================================
+
+// --- Top Bar ------------------------------------------------------------------
+.topbar {
+  background: $bg-black;
+  border-bottom: 1px solid $border-color;
+  height: $topbar-height;
+  display: flex;
+  align-items: center;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__left,
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-xs;
+    color: $text-secondary;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    i, svg {
+      color: $color-primary;
+      font-size: 12px;
+    }
+
+    &:hover {
+      color: $text-primary;
+    }
+  }
+
+  &__promo {
+    font-size: $font-size-xs;
+    color: $color-primary;
+    font-weight: $font-weight-semibold;
+    text-align: center;
+
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+}
+
+// --- Main Header --------------------------------------------------------------
+.header-main {
+  background: $bg-dark;
+  border-bottom: 1px solid $border-color;
+  height: $header-height;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: $z-index-sticky;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-xl;
+    width: 100%;
+  }
+}
+
+// --- Logo ---------------------------------------------------------------------
+.header-logo {
+  flex-shrink: 0;
+
+  a {
+    display: block;
+    text-decoration: none;
+  }
+
+  img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+
+  &__text {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-extrabold;
+    color: $color-primary;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+}
+
+// --- Search Bar ---------------------------------------------------------------
+.header-search {
+  flex: 1;
+  max-width: 600px;
+  position: relative;
+
+  &__form {
+    display: flex;
+    align-items: center;
+    background: $bg-dark-secondary;
+    border: 1.5px solid $border-color-light;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+
+    &:focus-within {
+      border-color: $color-primary;
+      box-shadow: $shadow-glow-primary;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: $spacing-sm $spacing-md;
+    color: $text-primary;
+    font-size: $font-size-base;
+    font-family: $font-family-base;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+
+  &__btn {
+    background: $color-primary;
+    border: none;
+    padding: $spacing-sm $spacing-md;
+    cursor: pointer;
+    color: $bg-black;
+    font-size: $font-size-lg;
+    transition: background $transition-fast;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: $color-primary-hover;
+    }
+  }
+
+  &__toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: $text-primary;
+    font-size: $font-size-xl;
+    cursor: pointer;
+    padding: $spacing-sm;
+  }
+}
+
+// --- Header Actions -----------------------------------------------------------
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-shrink: 0;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: $text-secondary;
+    font-size: $font-size-xs;
+    gap: $spacing-xs;
+    transition: color $transition-fast;
+    position: relative;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: $spacing-xs;
+
+    i, svg {
+      font-size: $font-size-xl;
+      display: block;
+    }
+
+    span {
+      display: block;
+      line-height: 1;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: $color-accent;
+    color: $text-primary;
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    min-width: 18px;
+    height: 18px;
+    border-radius: $border-radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+  }
+}
+
+// --- Navigation / Mega Menu ---------------------------------------------------
+.header-nav {
+  background: $bg-dark-secondary;
+  border-bottom: 1px solid $border-color;
+  height: $nav-height;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: $z-index-dropdown - 1;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    gap: 0;
+  }
+
+  &__item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    &:hover > .mega-menu,
+    &:hover > .nav-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: 0 $spacing-md;
+    height: 100%;
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    transition: color $transition-fast, background $transition-fast;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+
+    &:hover,
+    &.active {
+      color: $color-primary;
+      border-bottom-color: $color-primary;
+    }
+  }
+
+  &__badge {
+    font-size: 10px;
+    font-weight: $font-weight-bold;
+    padding: 2px 5px;
+    border-radius: $border-radius-sm;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &--neu {
+      background: $color-primary;
+      color: $bg-black;
+    }
+
+    &--hot {
+      background: $color-accent;
+      color: $text-primary;
+    }
+  }
+}
+
+// --- Mega Menu ----------------------------------------------------------------
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 600px;
+  background: $bg-dark-secondary;
+  border: 1px solid $border-color;
+  border-top: 2px solid $color-primary;
+  box-shadow: $shadow-xl;
+  padding: $spacing-xl;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: $spacing-xl;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity $transition-base, visibility $transition-base, transform $transition-base;
+  z-index: $z-index-dropdown;
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &__title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: $spacing-xs;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: $spacing-sm;
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    text-decoration: none;
+    padding: $spacing-xs 0;
+    transition: color $transition-fast, padding-left $transition-fast;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &:hover {
+      color: $color-primary;
+      padding-left: $spacing-xs;
+    }
+  }
+
+  &__banner {
+    img {
+      width: 100%;
+      border-radius: $border-radius-md;
+      object-fit: cover;
+    }
+  }
+}
+
+// Simple dropdown for items without mega-menu
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: $bg-dark-secondary;
+  border: 1px solid $border-color;
+  border-top: 2px solid $color-primary;
+  box-shadow: $shadow-lg;
+  list-style: none;
+  margin: 0;
+  padding: $spacing-sm 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity $transition-base, visibility $transition-base, transform $transition-base;
+  z-index: $z-index-dropdown;
+
+  li a {
+    display: block;
+    padding: $spacing-sm $spacing-md;
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    transition: color $transition-fast, background $transition-fast;
+
+    &:hover {
+      color: $color-primary;
+      background: $bg-dark-accent;
+    }
+  }
+}
+
+// --- Sticky Header ------------------------------------------------------------
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: $z-index-fixed;
+  transform: translateY(0);
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &.header--hidden {
+    transform: translateY(-100%);
+  }
+
+  &.header--scrolled {
+    box-shadow: $shadow-xl;
+  }
+}
+
+// --- Mobile Menu --------------------------------------------------------------
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-sm;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: $text-primary;
+    transition: transform $transition-base, opacity $transition-base;
+    transform-origin: center;
+  }
+
+  &.is-active {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: $z-index-modal-backdrop;
+  opacity: 0;
+  transition: opacity $transition-base;
+
+  &.is-active {
+    opacity: 1;
+  }
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100%;
+  background: $bg-dark-secondary;
+  border-right: 1px solid $border-color;
+  z-index: $z-index-modal;
+  transition: left $transition-slow;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  &.is-open {
+    left: 0;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-md;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__close {
+    background: none;
+    border: none;
+    color: $text-secondary;
+    font-size: $font-size-xl;
+    cursor: pointer;
+    padding: $spacing-xs;
+    transition: color $transition-fast;
+
+    &:hover { color: $text-primary; }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: $spacing-sm 0;
+    flex: 1;
+  }
+
+  &__item a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-sm $spacing-md;
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: $font-size-base;
+    border-bottom: 1px solid $border-color;
+    transition: color $transition-fast, background $transition-fast;
+
+    &:hover {
+      color: $color-primary;
+      background: $bg-dark-accent;
+    }
+  }
+}
